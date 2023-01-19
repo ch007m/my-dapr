@@ -35,13 +35,10 @@ install() {
 }
 
 play() {
-  pe "curl http://${NODEAPP_URL}/ports"
+  p "Post an order"
   pe "curl --request POST --data \"@sample.json\" --header Content-Type:application/json http://${NODEAPP_URL}/neworder"
+  p "Get last order created"
   pe "curl http://${NODEAPP_URL}/order"
-
-  pe "k apply -f ./deploy/python.yaml"
-  pe "k rollout status deploy/pythonapp"
-  pe "k logs --selector=app=node -c node --tail=-1"
 }
 
 cleanup() {
