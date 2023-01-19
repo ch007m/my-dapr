@@ -1,8 +1,8 @@
-# my-dapr
+# Dapr on kind
 
 Project used to test/demo dapr on kind kubernetes
 
-## HelloWorld
+## Node and Python Order quickstart
 
 To setup a kind kubernetes cluster on your local machine, install [dapr](https://dapr.io/), execute this `all-in-one` instructions bash script where you pass your `HOST_VM_IP` address.
 
