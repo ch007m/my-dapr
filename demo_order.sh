@@ -21,7 +21,7 @@ fi
 
 pe "cd ${DAPR_FOLDER}/tutorials/hello-kubernetes"
 
-install_demo() {
+install() {
   pe "helm install redis bitnami/redis --wait"
   pe "k apply -f ./deploy/redis.yaml"
   pe "k apply -f ./deploy/node.yaml"
@@ -44,18 +44,19 @@ play() {
   pe "k logs --selector=app=node -c node --tail=-1"
 }
 
-remove_demo() {
+cleanup() {
   pe "k delete -f ./deploy/redis.yaml"
   pe "k delete -f ./deploy/node.yaml"
   pe "k delete -f ./deploy/python.yaml"
+  pe "k delete ingress nodeapp"
   pe "helm uninstall redis"
 }
 
 case $1 in
-    install_demo) "$@"; exit;;
+    install) "$@"; exit;;
     play) "$@"; exit;;
-    remove_demo) "$@"; exit;;
+    cleanup) "$@"; exit;;
 esac
 
-install_demo
+install
 play

@@ -23,7 +23,7 @@ HOST_VM_IP=192.168.1.90 ./setup-dapr.sh
 
 To play with the [Order quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes), execute the following bash command:
 ```bash
-HOST_VM_IP=192.168.1.90 ./demo_order.sh install_demo
+HOST_VM_IP=192.168.1.90 ./demo_order.sh install
 ```
 
 To get orders (or post orders), do some cUrl requests using the endpoint: `http://nodeapp.<HOST_VM_IP>.nip.io/order`
@@ -38,4 +38,10 @@ curl http://${NODEAPP_URL}/order"
 or using the demo bash script:
 ```bash
 HOST_VM_IP=192.168.1.90 ./demo_order.sh play
+```
+
+To cleanup the demo:
+
+```bash
+./demo_order.sh cleanup
 ```
