@@ -19,9 +19,10 @@ HOST_VM_IP=192.168.1.90 ./setup-dapr.sh
 
 **NOTE**: You can access the dapr dashboard using the url: `https://dapr.<HOST_VM_IP>.nip.io`
 
-## Node and Python Order quickstart
+## Order quickstart
 
-To play with the [Order quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes), execute the following bash command:
+To play with the [Order quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) which is an application composed of 2 microservices: node order app and python backend issuing
+order requests, execute the following bash command:
 ```bash
 HOST_VM_IP=192.168.1.90 ./demo_order.sh install
 ```
