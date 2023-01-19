@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
+: ${HOST_VM_IP:=1.1.1.1.nip.io}
 DAPR_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
+DAPR_VERSION=1.9.5
+DAPR_NS=dapr-system
 
 . ${DAPR_DIR}/common.sh
 . ${DAPR_DIR}/play-demo.sh
@@ -8,11 +11,6 @@ DAPR_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
 # Parameters to play the scenario
 TYPE_SPEED=100
 NO_WAIT=true
-
-: ${HOST_VM_IP:=1.1.1.1.nip.io}
-
-DAPR_VERSION=1.9.5
-DAPR_NS=dapr-system
 
 curl -s -L "https://raw.githubusercontent.com/snowdrop/k8s-infra/main/kind/kind-reg-ingress.sh" | bash -s y latest 0
 
