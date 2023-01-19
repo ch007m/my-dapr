@@ -1,0 +1,10 @@
+controller:
+  service:
+    type: NodePort
+  hostPort:
+    enabled: true
+  watchIngressWithoutClass: true  
+  podAnnotations:
+    dapr.io/enabled: "true"
+    dapr.io/app-id: "nginx-ingress"
+    dapr.io/port: "80"
