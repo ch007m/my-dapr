@@ -44,7 +44,7 @@ or using the demo bash script:
 HOST_VM_IP=192.168.1.90 ./demo_order.sh play
 ```
 
-To cleanup the demo:
+To clean up the demo:
 
 ```bash
 ./demo_order.sh cleanup
