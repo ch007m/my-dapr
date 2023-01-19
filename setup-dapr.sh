@@ -9,14 +9,15 @@ DAPR_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
 TYPE_SPEED=100
 NO_WAIT=true
 
-dapr_version=1.9.5
-dapr_ns=dapr-system
-HOST_VM_IP=192.168.1.90
-quickstarts_git_repo=https://github.com/dapr/quickstarts.git
-quickstarts_folder=quickstarts
+: ${HOST_VM_IP:=1.1.1.1.nip.io}
 
-if [ ! -d "$quickstarts_folder" ] ; then
-    pe "git clone $quickstarts_git_repo $quickstarts_folder"
+DAPR_VERSION=1.9.5
+DAPR_NS=dapr-system
+DAPR_QUICKSTARTS_GIT_REPO=https://github.com/dapr/quickstarts.git
+DAPR_FOLDER=quickstarts
+
+if [ ! -d "$DAPR_FOLDER" ] ; then
+    pe "git clone $DAPR_QUICKSTARTS_GIT_REPO $DAPR_FOLDER"
 fi
 
 pe "cd quickstarts/tutorials/hello-kubernetes"
@@ -24,8 +25,8 @@ pe "cd quickstarts/tutorials/hello-kubernetes"
 curl -s -L "https://raw.githubusercontent.com/snowdrop/k8s-infra/main/kind/kind-reg-ingress.sh" | bash -s y latest 0
 
 pe "helm upgrade --install dapr dapr/dapr \
-  --version=${dapr_version} \
-  -n ${dapr_ns} \
+  --version=${DAPR_VERSION} \
+  -n ${DAPR_NS} \
   --create-namespace \
   --wait"
 
