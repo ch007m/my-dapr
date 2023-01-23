@@ -11,7 +11,17 @@ Project used to test/demo dapr on kind kubernetes
 
 ## Dapr setup
 
-To create a kind kubernetes cluster on your local machine and install [dapr](https://dapr.io/), execute this `all-in-one` instructions bash script where you pass your `HOST_VM_IP` address.
+Create a kind kubernetes cluster on your local machine:
+
+```bash
+HOST_VM_IP=192.168.1.90 ./kind.sh
+```
+
+**NOTE**: The kind cluster can be deleted using the argument `./kind.sh delete` or during the creation `delete=y ./kind.sh`.
+You can also change the version of the cluster to be used `k8s_version=latest ./kind.sh` or `k8s_version=1.24 ./kind.sh`.
+
+Next, install [dapr](https://dapr.io/) using the bash [script](./setup-dapr.sh) where you pass the `HOST_VM_IP` address
+which is used to expose the ingress routes (dashboard, services, etc).
 
 ```bash
 HOST_VM_IP=192.168.1.90 ./setup-dapr.sh

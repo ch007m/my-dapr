@@ -12,12 +12,24 @@ DAPR_NS=dapr-system
 TYPE_SPEED=100
 NO_WAIT=true
 
-curl -s -L "https://raw.githubusercontent.com/snowdrop/k8s-infra/main/kind/kind-reg-ingress.sh" | bash -s y latest 0
+install() {
+  pe "helm upgrade --install dapr dapr/dapr \
+    --version=${DAPR_VERSION} \
+    -n ${DAPR_NS} \
+    --create-namespace \
+    --wait"
 
-pe "helm upgrade --install dapr dapr/dapr \
-  --version=${DAPR_VERSION} \
-  -n ${DAPR_NS} \
-  --create-namespace \
-  --wait"
+  pe "k create ingress -n ${DAPR_NS} dapr --class=nginx --rule=\"dapr.${HOST_VM_IP}.nip.io/*=dapr-dashboard:8080\""
+}
 
-pe "k create ingress -n dapr-system dapr --class=nginx --rule=\"dapr.${HOST_VM_IP}.nip.io/*=dapr-dashboard:8080\""
+cleanup() {
+  pe "k delete ingress -n ${DAPR_NS}"
+  pe "helm uninstall dapr -n ${DAPR_NS}"
+}
+
+case $1 in
+    install) "$@"; exit;;
+    cleanup) "$@"; exit;;
+esac
+
+install
