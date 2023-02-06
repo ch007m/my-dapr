@@ -2,8 +2,8 @@
 
 DAPR_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
 
-. ${DAPR_DIR}/common.sh
-. ${DAPR_DIR}/play-demo.sh
+. ${DAPR_DIR}/../common.sh
+. ${DAPR_DIR}/../play-demo.sh
 
 # Parameters to play the scenario
 TYPE_SPEED=100

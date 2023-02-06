@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-: ${HOST_VM_IP:=1.1.1.1.nip.io}
+: ${HOST_VM_IP:=1.1.1.1}
 DAPR_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
 DAPR_VERSION=1.9.5
 DAPR_NS=dapr
 
-. ${DAPR_DIR}/common.sh
-. ${DAPR_DIR}/play-demo.sh
+. ${DAPR_DIR}/../common.sh
+. ${DAPR_DIR}/../play-demo.sh
 
 # Parameters to play the scenario
 TYPE_SPEED=100
@@ -14,7 +14,7 @@ NO_WAIT=true
 
 install() {
   pe "oc new-project ${DAPR_NS}"
-  pe "oc policy add-role-to-user system:openshift:scc:anyuid -z dapr"
+  pe "oc policy add-role-to-user system:openshift:scc:anyuid -z dapr-operator"
   pe "helm upgrade --install dapr dapr/dapr \
     --version=${DAPR_VERSION} \
     -n ${DAPR_NS}"
@@ -23,8 +23,6 @@ install() {
 }
 
 cleanup() {
-  pe "k delete ingress dapr -n ${DAPR_NS}"
-  pe "helm uninstall dapr -n ${DAPR_NS}"
   pe "oc delete project ${DAPR_NS}"
 }
 
