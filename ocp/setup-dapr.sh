@@ -23,7 +23,7 @@ cat <<EOF > dapr.yml
   dapr_sentry:
     runAsNonRoot: true
   dapr_sidecar_injector:
-    runAsNonRoot: false
+    runAsNonRoot: true
   global:
     logAsJson: false
 EOF
