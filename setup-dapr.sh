@@ -23,7 +23,7 @@ install() {
 }
 
 cleanup() {
-  pe "k delete ingress -n ${DAPR_NS}"
+  pe "k delete ingress dapr -n ${DAPR_NS}"
   pe "helm uninstall dapr -n ${DAPR_NS}"
 }
 
