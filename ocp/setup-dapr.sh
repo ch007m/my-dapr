@@ -24,6 +24,9 @@ cat <<EOF > dapr.yml
     runAsNonRoot: true
   dapr_sidecar_injector:
     runAsNonRoot: true
+    logLevel: info
+    debug:
+      enabled: false
   global:
     logAsJson: false
 EOF
@@ -42,6 +45,7 @@ install() {
 
 cleanup() {
   pe "oc delete project ${DAPR_NS}"
+  pe "helm uninstall dapr -n ${DAPR_NS}"
 }
 
 case $1 in
