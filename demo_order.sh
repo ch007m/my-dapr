@@ -42,11 +42,11 @@ play() {
 }
 
 cleanup() {
+  pe "helm uninstall redis"
   pe "k delete -f ./deploy/redis.yaml"
   pe "k delete -f ./deploy/node.yaml"
   pe "k delete -f ./deploy/python.yaml"
   pe "k delete ingress nodeapp"
-  pe "helm uninstall redis"
 }
 
 case $1 in
