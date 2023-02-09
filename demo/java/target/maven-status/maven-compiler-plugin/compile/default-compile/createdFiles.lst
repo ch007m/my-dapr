@@ -1,6 +1,0 @@
-META-INF/dekorate/kubernetes.yml
-me/snowdrop/OrderService.class
-META-INF/dekorate/kubernetes.json
-me/snowdrop/model/Order.class
-me/snowdrop/model/Data.class
-me/snowdrop/OrderProcessingApplication.class
