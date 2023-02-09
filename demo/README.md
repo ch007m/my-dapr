@@ -1,8 +1,8 @@
 ## How To play with the demo
 
 The demo implements the service invocation pattern using a Node backend application storing orders in a redis database. The Spring Boot 
-application will call the nodeapp using the dapr id of the `nodeapp`. Likewise, the Spring Boot application exposes a service `/springbootapp` that we can curl
-using its endpoint `http://localhost:8080/springbootapp` or dapr command ``
+application will call the nodeapp using the dapr id of the `nodeapp`. Likewise, the Spring Boot application exposes a service `/generateOrder` that we can curl
+using its endpoint `http://localhost:8080/generateOrder` or dapr HTTP port `localhost:3501/v1.0/invoke/springbootapp/method/generateOrder`
 
 ## Using docker
 
