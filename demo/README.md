@@ -64,6 +64,7 @@ EOF
   kubectl apply -n demo -f ./deploy/node.yaml
   kubectl rollout -n demo status deploy/nodeapp
   kubectl apply -n demo -f ./java/target/classes/META-INF/dekorate/kubernetes.yml
+  kubectl set image -n demo deployment/order-service order-service=localhost:5000/dapr/order-service:1.0
   ```
 - Create an ingress route to access the Spring Boot app
   ```bash
