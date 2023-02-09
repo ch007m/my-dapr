@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 : ${HOST_VM_IP:=1.1.1.1.nip.io}
+: ${DAPR_VERSION=1.9.6}
+: ${DAPR_NS:=dapr}
 DAPR_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
-DAPR_VERSION=1.9.5
-DAPR_NS=dapr-system
 
 . ${DAPR_DIR}/common.sh
 . ${DAPR_DIR}/play-demo.sh
