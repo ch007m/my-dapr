@@ -21,10 +21,17 @@ HOST_VM_IP=192.168.1.90 ./kind.sh
 You can also change the version of the cluster to be used `k8s_version=latest ./kind.sh` or `k8s_version=1.24 ./kind.sh`.
 
 Next, install [dapr](https://dapr.io/) using the bash [script](./setup-dapr.sh) where you pass the `HOST_VM_IP` address
-which is used to expose the ingress routes (dashboard, services, etc).
+which is used to expose the ingress route (e.g. dashboard, etc). The installation can be cleaned using `./setup-dapr.sh cleanup`
 
 ```bash
 HOST_VM_IP=192.168.1.90 ./setup-dapr.sh
+```
+
+You can define the following variables:
+```bash
+HOST_VM_IP=<HOST_VM_IP> (e.g. 127.0.0.1.nip.io)
+DAPR_VERSION=<DAPR_VERSION> (e.g. version of dapr to be installed. Default: 1.9.6)
+DAPR_NS=<DAPR_NS> (e.g. namespace where dapr is installed on the cluster. Default: dapr)
 ```
 
 **NOTE**: You can access the dapr dashboard using the url: `https://dapr.<HOST_VM_IP>.nip.io`
