@@ -1,3 +1,5 @@
 /.idea/
 /quickstarts/
 /dapr.yml
+/demo/node/node_modules/
+/demo/java/target

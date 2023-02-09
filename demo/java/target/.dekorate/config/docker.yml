@@ -1,0 +1,33 @@
+--- !<io.dekorate.docker.config.EditableDockerBuildConfig>
+project:
+  root: file:///Users/cmoullia/code/dapr/my-dapr/demo/java/
+  dekorateInputDir: null
+  dekorateOutputDir: META-INF/dekorate
+  dekorateMetaDir: ../.dekorate
+  buildInfo:
+    name: order-service
+    version: "1.0"
+    packaging: jar
+    buildTool: maven
+    buildToolVersion: 3.8.7
+    outputFile: file:///Users/cmoullia/code/dapr/my-dapr/demo/java/target/order-service-1.0.jar
+    classOutputDir: file:///Users/cmoullia/code/dapr/my-dapr/demo/java/target/classes/
+    resourceDir: file:///Users/cmoullia/code/dapr/my-dapr/demo/java/target/classes/
+  scmInfo:
+    root: file:///Users/cmoullia/code/dapr/my-dapr/
+    branch: main
+    commit: b1bb04d292c7a7844aebe995ffb83625e5c9244b
+    remote:
+      '[remote "origin"]': https://github.com/dapr/dapr.git
+partOf: null
+name: order-service
+version: "1.0"
+enabled: true
+registry: localhost:5000
+group: cmoulliard
+image: null
+dockerFile: Dockerfile
+autoBuildEnabled: false
+autoPushEnabled: false
+autoLoadEnabled: false
+autoDeployEnabled: false
