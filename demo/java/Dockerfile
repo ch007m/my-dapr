@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-COPY target/order-service-1.0.jar order.jar
-ENTRYPOINT ["java","-jar","/order.jar"]
+FROM openjdk:17
+
+COPY target/*.jar order.jar
+CMD java ${JAVA_OPTS} -jar order.jar
