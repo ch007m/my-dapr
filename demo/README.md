@@ -17,12 +17,13 @@ using its endpoint `http://localhost:8080/generateOrder` or dapr HTTP port `loca
   npm install
   dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 node app.js
   ```
-- Opn a 3rd terminal from where you can curl the Spring Boot Endpoint:
+- Opn a 3rd terminal from where you can curl the Spring Boot Endpoint or Dapr endpoint:
   ```bash
   curl -v localhost:8080/generateOrder
   curl -v localhost:3501/v1.0/invoke/springbootapp/method/generateOrder
   
-  using Httpie tool
+- using Httpie tool
+  ```bash
   http :8080/generateOrder
   http :3501/v1.0/invoke/springbootapp/method/generateOrder
   ```
