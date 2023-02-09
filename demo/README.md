@@ -27,3 +27,60 @@ using its endpoint `http://localhost:8080/generateOrder` or dapr HTTP port `loca
   http :8080/generateOrder
   http :3501/v1.0/invoke/springbootapp/method/generateOrder
   ```
+  
+## And now kubernetes
+
+- Setup a kind k8s cluster and install dapr using this [script](../setup-dapr.sh)
+- Build and push the Spring Boot image on the local registry
+  ```bash
+  mvn clean package -Ddekorate.build=true -Ddekorate.push=true -Ddekorate.docker.registry=kind-registry:5000 -Ddekorate.docker.group=dapr
+  # mvn spring-boot:build-image -Dspring-boot.build-image.imageName=kind-registry:5000/dapr/order-service:1.0 -Dspring-boot.build-image.publish=true
+  ```
+- Install redis `helm install redis bitnami/redis -n demo --create-namespace --wait`
+- Install the redis dapr component
+```bash
+cat <<-EOF | kubectl apply -n demo -f -
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  type: state.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    value: redis-master:6379
+  - name: redisPassword
+    secretKeyRef:
+       name: redis
+       key: redis-password
+auth:
+  secretStore: kubernetes
+EOF
+```
+
+- Deploy within the demo namespace the SB and Nodejs applications
+  ```bash
+  kubectl apply -n demo -f ./deploy/node.yaml
+  kubectl rollout -n demo status deploy/nodeapp
+  kubectl apply -n demo -f ./java/target/classes/META-INF/dekorate/kubernetes.yml
+  ```
+- Create an ingress route to access the Spring Boot app
+  ```bash
+  kubectl create ingress -n demo sbapp --class=nginx --rule="sb.127.0.0.1.nip.io/*=order-service:8080"
+  ```
+- Curl or http the SpringBoot endpoint
+  ```bash
+  curl -v sb.127.0.0.1.nip.io/generateOrder
+  http sb.127.0.0.1.nip.io/generateOrder
+  ```
+- Check the log of the nodeapp to see if orders have been created
+  ```bash
+  kubectl logs -n demo -lapp=node
+  Defaulted container "node" out of: node, daprd
+  Node App listening on port 3000!
+  Got a new order! Order ID: 10
+  Successfully persisted state for Order ID: 10
+  Got a new order! Order ID: 11
+  Successfully persisted state for Order ID: 11
+  ```
