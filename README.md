@@ -66,3 +66,18 @@ To clean up the demo:
 ```bash
 ./demo_order.sh cleanup
 ```
+
+## Collect Metrics
+
+- To collect the Dapr metrics of the system like the sidecarss it is needed to install promethus, grafana and to deploy the grafana templates
+
+```bash
+helm install grafana grafana/grafana -n dapr-monitoring --create-namespace --set ingress.enabled=true --set ingress.hosts="{dapr-monitoring.127.0.0.1.nip.io}"
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install dapr-prom prometheus-community/prometheus -n dapr-monitoring
+```
+- You can get the grafana admin user using the command `kubectl get secret --namespace dapr-monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo`
+- Next configure the prometheus [datasource](https://docs.dapr.io/operations/monitoring/metrics/grafana/#configure-prometheus-as-data-source)
+- And import the [templates](https://docs.dapr.io/operations/monitoring/metrics/grafana/#import-dashboards-in-grafana)
+
