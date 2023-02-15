@@ -7,7 +7,7 @@ using its endpoint `http://localhost:8080/generateOrder` or dapr HTTP port `loca
 ## Using docker
 
 - Start docker or podman
-- run `dpar init`
+- run `dapr init`
 - Open a terminal under the Spring Boot project and run:
   ```bash
   dapr run --app-id springbootapp --app-port 8080 --dapr-http-port 3501 mvn spring-boot:run
