@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-: ${HOST_VM_IP:=127.0.0.1.nip.io}
-: ${DAPR_VERSION=1.10}
-: ${DAPR_NS:=dapr}
+HOST_VM_IP=${HOST_VM_IP:-127.0.0.1}
+DAPR_VERSION=${DAPR_VERSION:-1.10}
+DAPR_NS=${DAPR_NS:-dapr}
 DAPR_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
 
 . ${DAPR_DIR}/common.sh

@@ -10,9 +10,9 @@ TYPE_SPEED=100
 NO_WAIT=true
 
 # Script parameters
-: ${HOST_VM_IP:=127.0.0.1.nip.io}
-: ${DAPR_QUICKSTARTS_GIT_REPO:=https://github.com/dapr/quickstarts.git}
-: ${DAPR_FOLDER:=quickstarts}
+HOST_VM_IP=${HOST_VM_IP:-127.0.0.1}
+DAPR_QUICKSTARTS_GIT_REPO=${DAPR_QUICKSTARTS_GIT_REPO:-https://github.com/dapr/quickstarts.git}
+DAPR_FOLDER=${DAPR_FOLDER:-quickstarts}
 NODEAPP_URL=nodeapp.${HOST_VM_IP}.nip.io
 
 if [ ! -d "$DAPR_FOLDER" ] ; then
@@ -45,7 +45,6 @@ cleanup() {
   pe "helm uninstall redis"
   pe "k delete -f ./deploy/redis.yaml"
   pe "k delete -f ./deploy/node.yaml"
-  pe "k delete -f ./deploy/python.yaml"
   pe "k delete ingress nodeapp"
 }
 

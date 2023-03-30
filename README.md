@@ -44,16 +44,16 @@ order requests, execute the following bash command:
 HOST_VM_IP=192.168.1.90 ./demo_order.sh install
 ```
 
-To get orders (or post orders), do some cUrl requests using the nodeapp endpoint: `http://nodeapp.<HOST_VM_IP>.nip.io/order`
+To get orders (or post orders), do some cUrl requests using the order nodeapp URL: `export NODEAPP_URL='http://nodeapp.<HOST_VM_IP>.nip.io'`
 
 Post an order
 ```bash
-curl --request POST --data \"@quickstarts/tutorials/hello-kubernetes/sample.json\" --header Content-Type:application/json http://${NODEAPP_ENDPOINT}/neworder
+curl --request POST --data \"@quickstarts/tutorials/hello-kubernetes/sample.json\" --header Content-Type:application/json "$NODEAPP_URL/neworder"
 ```
 
 Get the last order:
 ```bash
-curl http://${NODEAPP_ENDPOINT}/order"
+curl "$NODEAPP_URL/order"
 ```
 
 or using the demo bash script:
