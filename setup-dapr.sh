@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 : ${HOST_VM_IP:=127.0.0.1.nip.io}
-: ${DAPR_VERSION=1.9.6}
+: ${DAPR_VERSION=1.10}
 : ${DAPR_NS:=dapr}
 DAPR_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
 
