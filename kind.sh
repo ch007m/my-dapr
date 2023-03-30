@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-: ${delete:=n}
-: ${k8s_version:=latest}
+KIND_DELETE=${KIND_DELETE:-n}
+K8S_VERSION=${K8S_VERSION:-latest}
+KIND_NAME=${KIND_NAME:-kind}
+HOST_VM_IP=${HOST_VM_IP:-127.0.0.1}
 
 KIND_DIR="$(cd $(dirname "${BASH_SOURCE}") && pwd)"
 
@@ -13,7 +15,7 @@ TYPE_SPEED=100
 NO_WAIT=true
 
 install() {
- curl -s -L "https://raw.githubusercontent.com/snowdrop/k8s-infra/main/kind/kind-reg-ingress.sh" | bash -s ${delete} ${k8s_version} 0
+ curl -s -L "https://raw.githubusercontent.com/snowdrop/k8s-infra/main/kind/kind-reg-ingress.sh" | bash -s ${KIND_DELETE} ${K8S_VERSION} ${KIND_NAME} 0 ${HOST_VM_IP}
 }
 
 delete() {
