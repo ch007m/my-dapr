@@ -10,7 +10,7 @@ TYPE_SPEED=100
 NO_WAIT=true
 
 # Script parameters
-: ${HOST_VM_IP:=1.1.1.1.nip.io}
+: ${HOST_VM_IP:=127.0.0.1.nip.io}
 : ${DAPR_QUICKSTARTS_GIT_REPO:=https://github.com/dapr/quickstarts.git}
 : ${DAPR_FOLDER:=quickstarts}
 NODEAPP_URL=nodeapp.${HOST_VM_IP}.nip.io
