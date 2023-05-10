@@ -32,9 +32,11 @@ Next, we must add the role `system:openshift:scc:anyuid` to the service account 
 oc policy add-role-to-user system:openshift:scc:anyuid -z dapr-operator
 ```
 
+>**TIP**: You can use our installation script to execute the different commands `HOST_VM_IP=<HOSTNAME_OF_THE_CLUSTER> ./ocp/dapr.sh`.
+
 To test if the dapr deployment succeeded, execute the following bash script able to install a demo project, redis, etc
 ```bash
-HOST_VM_IP=<HOSTNAME_OF_THE_CLUSTER>./ocp/demo_order.sh
+HOST_VM_IP=<HOSTNAME_OF_THE_CLUSTER> ./ocp/demo_order.sh
 ```
 If the script is played without errors, then you should be able to see the following output
 ```text
