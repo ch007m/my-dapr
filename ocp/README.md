@@ -1,6 +1,6 @@
 ## OpenShift
 
-Dapr can be installed OpenShift on ocp4 using the upstream [helm chart](https://github.com/dapr/dapr/tree/master/charts/dapr).
+Dapr can be installed on OpenShift 4 using the upstream [helm chart](https://github.com/dapr/dapr/tree/master/charts/dapr).
 To be successfully, it is needed, as discussed [here](https://github.com/dapr/dapr/issues/3069), to configure the Dapr containers to start them as `nonRoot`.
 For that purpose, create a values.yml file and pass it to the helm client when you will deploy it:
 
@@ -22,14 +22,17 @@ cat <<EOF > values.yml
   global:
     logAsJson: false
 EOF
-
-helm repo add dapr https://dapr.github.io/helm-charts/
-helm upgrade --install dapr dapr/dapr -f dapr.yml --version=1.10 -n dapr    
 ```
 
-Next, we must add the role `system:openshift:scc:anyuid` to the service account of Dapr operator
+Add the following role `system:openshift:scc:anyuid` to the service account of the `Dapr operator` to avoid to get warnings messages `e.g. Warning: would violate PodSecurity ...`
 ```bash
 oc policy add-role-to-user system:openshift:scc:anyuid -z dapr-operator
+```
+
+Deploy th helm chart
+```bash
+helm repo add dapr https://dapr.github.io/helm-charts/
+helm upgrade --install dapr dapr/dapr -f dapr.yml --version=1.10 -n dapr    
 ```
 
 >**TIP**: You can use our installation script to execute the different commands `HOST_VM_IP=<HOSTNAME_OF_THE_CLUSTER> ./ocp/dapr.sh`.
@@ -38,7 +41,7 @@ To test if the dapr deployment succeeded, execute the following bash script able
 ```bash
 HOST_VM_IP=<HOSTNAME_OF_THE_CLUSTER> ./ocp/demo_order.sh
 ```
-If the script is played without errors, then you should be able to see the following output
+If the script is played without errors, then you should be able to see the following output messages
 ```text
 $ cd quickstarts/tutorials/hello-kubernetes
 $ helm install redis bitnami/redis -n dapr --set master.podSecurityContext.enabled=false --set master.containerSecurityContext.enabled=false
