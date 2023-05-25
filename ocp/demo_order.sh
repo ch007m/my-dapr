@@ -22,6 +22,10 @@ fi
 
 pe "cd ${DAPR_FOLDER}/tutorials/hello-kubernetes"
 
+init() {
+   pe "oc new-project ${DAPR_NS}"
+}
+
 install() {
   pe "helm install redis bitnami/redis -n ${DAPR_NS} --set master.podSecurityContext.enabled=false --set master.containerSecurityContext.enabled=false"
   pe "k -n ${DAPR_NS} apply -f ./deploy/redis.yaml"
@@ -50,10 +54,12 @@ cleanup() {
 }
 
 case $1 in
+    init) "$@"; exit;;
     install) "$@"; exit;;
     play) "$@"; exit;;
     cleanup) "$@"; exit;;
 esac
 
+init
 install
 play
