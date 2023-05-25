@@ -7,6 +7,8 @@ For that purpose, create a values.yml file and pass it to the helm client when y
 ```bash
 cat <<EOF > values.yml
   dapr_dashboard:
+    image:
+      registry: ghcr.io/dapr
     runAsNonRoot: true
   dapr_placement:
     runAsNonRoot: true
@@ -21,6 +23,7 @@ cat <<EOF > values.yml
       enabled: false
   global:
     logAsJson: false
+    registry: ghcr.io/dapr
 EOF
 ```
 
