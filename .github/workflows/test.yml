@@ -1,0 +1,25 @@
+name: Bash Script Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      
+
+jobs:
+  run_script:
+    name: Run Bash Script
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Execute Bash script
+      run: |
+        # chmod +x ./script/script_example.sh
+        #./script/script_example.sh ${{ github.event.head_commit.message }}
+        echo "Commit message: ${{ github.event.head_commit.message }}"
